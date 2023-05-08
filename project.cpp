@@ -27,6 +27,7 @@ void createIssue(vector<issue> *issues, vector<appUser> *allUsers)
             std::getline(std::cin, details);
             issue newOne = issue(title, details, email);
             issues->push_back(newOne);
+            notDone=1;
         }
         itUsers++;
     }
@@ -44,14 +45,16 @@ void changePw(vector<appUser> *users)
     string newPassword;
     cout<<"Enter your username: ";
     cin >> username;
-    cout<<"Confirm your password: ";
-    cin >> password;
-    cout<<"Enter new password: ";
-    cin>>newPassword;
+    bool found=false;
     while(it != users->end())
     {
         if(it->getUsername() == username)
         {
+            cout<<"Confirm your password: ";
+            cin >> password;
+            cout<<"Enter new password: ";
+            cin>>newPassword;
+            found = true;
             if(it->getPassword() == password)
             {
                 it->changePassword(newPassword);
@@ -64,6 +67,10 @@ void changePw(vector<appUser> *users)
             }
         }
         it++;
+    }
+    if(!found)
+    {
+        cout<<"User not found\n";
     }
 }
 
