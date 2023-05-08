@@ -1,14 +1,14 @@
 #include<iostream>
 #include<vector>
-#include"appUser.h"
-#include"issue.h"
+#include"user.h"
+#include"report.h"
 
 using namespace std;
 
-void createIssue(vector<issue> *issues, vector<appUser> *allUsers)
+void createIssue(vector<report> *reports, vector<user> *allUsers)
 {
-    vector<appUser>::iterator itUsers = allUsers->begin();
-    vector<issue>::iterator itIssues = issues->begin();
+    vector<user>::iterator itUsers = allUsers->begin();
+    vector<report>::iterator itIssues = reports->begin();
     string email;
     string title;
     string details;
@@ -23,23 +23,23 @@ void createIssue(vector<issue> *issues, vector<appUser> *allUsers)
             cin>>title;
             cin.clear();
             cin.sync();
-            cout<<"Enter issue details: ";
+            cout<<"Enter report details: ";
             std::getline(std::cin, details);
-            issue newOne = issue(title, details, email);
-            issues->push_back(newOne);
+            report newOne = report(title, details, email);
+            reports->push_back(newOne);
             notDone=1;
         }
         itUsers++;
     }
     if(!notDone)
     {
-        cout<<"User not found to open an issue\n";
+        cout<<"User not found to open an report\n";
     }
 }
 
-void changePw(vector<appUser> *users)
+void changePw(vector<user> *users)
 {
-    vector<appUser>::iterator it = users->begin();
+    vector<user>::iterator it = users->begin();
     string username;
     string password;
     string newPassword;
@@ -74,7 +74,7 @@ void changePw(vector<appUser> *users)
     }
 }
 
-void createUser(vector<appUser> *users)
+void createUser(vector<user> *users)
 {
     string name;
     string username;
@@ -104,17 +104,17 @@ void createUser(vector<appUser> *users)
         cout<<"Re-Enter your password: ";
         cin>>password2;
     }
-    appUser newUser = appUser(name,username,email,id,password);
+    user newUser = user(name,username,email,id,password);
     users->push_back(newUser);
     cout<<"User is created successfully\n";
 }
 
 int main()
 {
-    vector<appUser> allUsers;
-    vector<issue> allIssues;
+    vector<user> allUsers;
+    vector<report> allIssues;
     char choice;
-    cout<<"NOTE: a user must be created to be able to report an issue or change the password\n";
+    cout<<"NOTE: a user must be created to be able to report an report or change the password\n";
     cout<<"Welcome to simulation\n";
     cout<<"---------------------\n";
     do
@@ -123,7 +123,7 @@ int main()
         cout<<"-----\n";
         cout<<"1- Create a new user\n";
         cout<<"2- Change password\n";
-        cout<<"3- Report an issue\n";
+        cout<<"3- Report an report\n";
         cout<<"4- Exit\n";
         cout<<"Enter choice:";
         cin>>choice;
